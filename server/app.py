@@ -28,13 +28,13 @@ class Restaurants(Resource):
 
 class RestaurantDetail(Resource):
     def get(self, id):
-        restaurant = Restaurant.query.get(id)
+        restaurant = db.session.get(Restaurant, id)
         if restaurant:
             return restaurant.to_dict()
         return {'error': 'Restaurant not found'}, 404
 
     def delete(self, id):
-        restaurant = Restaurant.query.get(id)
+        restaurant = db.session.get(Restaurant, id)
         if restaurant:
             db.session.delete(restaurant)
             db.session.commit()
